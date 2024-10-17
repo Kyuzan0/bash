@@ -1,9 +1,13 @@
-# bash
+# Bash Scripts
 
-# Disable ipv6 di ubuntu 20.04
-masukan perintah berikut untuk disable ipv6 di ubuntu 20.04
-git curl -L s.id/dipv6 | bash
+## Disable IPv6 di Ubuntu 20.04
+Untuk menonaktifkan IPv6 di Ubuntu 20.04, jalankan perintah berikut:
 
-# Install wireguard di ubuntu 20.04
-masukan perintah berikut untuk install wireguard di ubuntu 20.04
-git curl -L s.id/install-wireguard | bash
+```bash
+curl -L s.id/dipv6 | bash
+
+## Install Wireguard di ubuntu 20.04
+Untuk menginstall wireguard di Ubuntu 20.04, jalankan perintah berikut:
+
+```bash
+curl -L s.id/install-wireguard | bash
