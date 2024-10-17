@@ -26,6 +26,7 @@ sudo apt install wireguard wireguard-tools -y
 mkdir -p /etc/wireguard
 cd /etc/wireguard
 
+
 #create privatekey and publickey
 wg genkey | tee wg_privatekey.key | wg pubkey > wg_publickey.key
 
@@ -33,4 +34,21 @@ wg_privatekey=$(cat wg_privatekey.key)
 wg_publickey=$(cat wg_publickey.key)
 echo "Kunci private wireguard: $wg_privatekey"
 echo "Kunci public wireguard: $wg_publickey"
+
+cat <<EOL > /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = $wg_privatekey
+Address = 10.0.0.1/24
+ListenPort = 52024
+
+# Forward traffic
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+chmod 600 /etc/wireguard/wg0.conf
+
+wg-quick up wg0
+systemctl enable wg-quick@wg0
+
+echo "Instalasi selesai"
 
