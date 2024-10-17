@@ -49,8 +49,7 @@ EOL
 
 chmod 600 /etc/wireguard/wg0.conf
 
-wg-quick up wg0
 systemctl enable wg-quick@wg0
-
-echo "Instalasi selesai"
+systemctl start wg-quick@wg0
+echo "=== Instalasi selesai ==="
 
