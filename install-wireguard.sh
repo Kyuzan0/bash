@@ -45,6 +45,8 @@ ListenPort = 52024
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 
+EOL
+
 chmod 600 /etc/wireguard/wg0.conf
 
 wg-quick up wg0
